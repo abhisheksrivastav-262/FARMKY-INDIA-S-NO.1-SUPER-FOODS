@@ -296,6 +296,7 @@ function FarmkyHome() {
               </Button>
             ))}
           </div>
+          <div className="gallery-catalog-link"><a href="/gallery">See all packs and flavours <ArrowRight aria-hidden="true" /></a></div>
         </div>
       </section>
 
