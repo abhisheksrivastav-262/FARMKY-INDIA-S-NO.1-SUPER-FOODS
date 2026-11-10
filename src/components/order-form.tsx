@@ -26,7 +26,7 @@ export function HomeOrderCard() {
   };
 
   return <>
-    <section className="home-order-section section-space" aria-labelledby="home-order-title">
+    <section className="home-order-section section-space" id="order" aria-labelledby="home-order-title">
       <div className="page-width home-order-card">
         <div className="home-order-image"><img src={premiumMakhanaFront} alt="FARMKY Premium Makhana pouch, Foxnut | Gorgon Nut, 250g" loading="lazy" /></div>
         <div className="home-order-copy"><span className="eyebrow">FARMKY Premium Makhana</span><h2 id="home-order-title" className="section-title">A good snack, ready for your day.</h2><p className="section-copy">Premium Makhana · Foxnut | Gorgon Nut · 250g</p><p className="section-copy order-description">Share your delivery details and preferred quantity. Your order request will open in WhatsApp for you to review and send.</p><Button className="hero-button" onClick={() => { setWhatsAppLink(""); setIsOpen(true); }}>Order Now <ArrowRight aria-hidden="true" /></Button></div>

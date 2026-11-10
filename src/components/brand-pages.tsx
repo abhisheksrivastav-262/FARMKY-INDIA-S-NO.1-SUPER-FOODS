@@ -47,6 +47,14 @@ export function ProductPage() {
 
 const productVariants = [
   {
+    title: "Premium Makhana",
+    details: "Foxnut | Gorgon Nut · 250g",
+    images: [
+      { src: premiumMakhanaFront, alt: "FARMKY Premium Makhana bag, Foxnut | Gorgon Nut, 250g" },
+      { src: premiumMakhanaDetail, alt: "FARMKY Premium Makhana bag, second supplied photo" },
+    ],
+  },
+  {
     title: "Premium Roasted Makhanas",
     details: "Tomato Flavour · ₹10",
     images: [
@@ -75,27 +83,19 @@ const productVariants = [
       { src: achariRs20ArtworkAlt, alt: "FARMKY Achari Flavour ₹20 packaging artwork, alternate supplied view" },
     ],
   },
-  {
-    title: "Premium Makhana",
-    details: "Foxnut | Gorgon Nut · 250g",
-    images: [
-      { src: premiumMakhanaFront, alt: "FARMKY Premium Makhana bag, Foxnut | Gorgon Nut, 250g" },
-      { src: premiumMakhanaDetail, alt: "FARMKY Premium Makhana bag, second supplied photo" },
-    ],
-  },
 ];
 
-export function ProductVariantGallery() {
+export function ProductVariantGallery({ home = false }: { home?: boolean }) {
   const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string } | null>(null);
-  return <section className="section-space gallery-section product-variants-section" id="product-gallery">
+  return <section className={`section-space gallery-section product-variants-section ${home ? "home-product-catalog" : ""}`} id={home ? "product-range" : "product-gallery"}>
     <div className="page-width">
-      <div className="section-heading center-heading"><span className="eyebrow">FARMKY product range</span><h2 className="section-title">Flavours and packs.</h2><p className="section-copy">Names, flavours, pack prices, and pack size are shown as printed on the supplied packaging.</p></div>
+      <div className="section-heading center-heading"><span className="eyebrow">FARMKY product range</span><h2 className="section-title">Find your FARMKY favourite.</h2><p className="section-copy">Explore every pack and flavour. Product names and pack details are shown as printed on the packaging.</p></div>
       <div className="product-variant-grid">
-        {productVariants.map((variant) => <article className="product-variant-card" key={variant.details}>
+        {productVariants.map((variant, index) => <article className={`product-variant-card ${home && index === 0 ? "featured-product-card" : ""}`} key={variant.details}>
           <div className={`product-variant-images ${variant.images.length === 1 ? "single-variant-image" : ""}`}>
             {variant.images.map((image) => <button className="product-variant-image" key={image.alt} type="button" onClick={() => setSelectedImage(image)} aria-label={`View ${variant.title}, ${variant.details}`}><img src={image.src} alt={image.alt} loading="lazy" /></button>)}
           </div>
-          <div className="product-variant-copy"><h3>{variant.title}</h3><p>{variant.details}</p></div>
+          <div className="product-variant-copy"><h3>{variant.title}</h3><p>{variant.details}</p>{home && index === 0 && <a className="catalog-order-link" href="#order">Order this pack <ArrowRight aria-hidden="true" /></a>}</div>
         </article>)}
       </div>
     </div>

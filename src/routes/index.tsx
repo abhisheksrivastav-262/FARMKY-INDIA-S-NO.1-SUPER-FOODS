@@ -16,6 +16,7 @@ import makhanaImage from "@/assets/farmky-makhana.jpg";
 import premiumMakhanaFront from "@/assets/products/premium-makhana-250g-front.webp";
 import { createWhatsAppEnquiryUrl } from "@/lib/contact";
 import { HomeOrderCard } from "@/components/order-form";
+import { ProductVariantGallery } from "@/components/brand-pages";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -224,6 +225,8 @@ function FarmkyHome() {
       </section>
 
       <HomeOrderCard />
+
+      <ProductVariantGallery home />
 
       <section className="benefits-section section-space" id="benefits">
         <div className="page-width">
