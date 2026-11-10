@@ -1,6 +1,7 @@
 import { useState, type FormEvent, type ReactNode } from "react";
 import { ArrowRight, Check, Leaf, Sparkles, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { OrderNowButton, ORDER_PRODUCTS } from "@/components/order-form";
 import makhanaImage from "@/assets/farmky-makhana.jpg";
 import phonePeQr from "@/assets/payment-phonepe-qr.png";
 import { createWhatsAppEnquiryUrl, FARMKY_PHONE_LINK } from "@/lib/contact";
@@ -49,6 +50,7 @@ const productVariants = [
   {
     title: "Premium Makhana",
     details: "Foxnut | Gorgon Nut · 250g",
+    orderProduct: ORDER_PRODUCTS[0]!,
     images: [
       { src: premiumMakhanaFront, alt: "FARMKY Premium Makhana bag, Foxnut | Gorgon Nut, 250g" },
       { src: premiumMakhanaDetail, alt: "FARMKY Premium Makhana bag, second supplied photo" },
@@ -57,6 +59,8 @@ const productVariants = [
   {
     title: "Premium Roasted Makhanas",
     details: "Tomato Flavour · ₹10",
+    orderProduct: ORDER_PRODUCTS[1]!,
+    isArtwork: true,
     images: [
       { src: tomatoRs10Artwork, alt: "FARMKY Premium Roasted Makhanas, Tomato Flavour, ₹10 pouch artwork" },
       { src: tomatoRs10ArtworkAlt, alt: "FARMKY Tomato Flavour ₹10 packaging artwork, alternate supplied view" },
@@ -65,11 +69,15 @@ const productVariants = [
   {
     title: "Premium Roasted Makhanas",
     details: "Achari Flavour · ₹10",
+    orderProduct: ORDER_PRODUCTS[2]!,
+    isArtwork: true,
     images: [{ src: achariRs10Artwork, alt: "FARMKY Premium Roasted Makhanas, Achari Flavour, ₹10 pouch artwork" }],
   },
   {
     title: "Premium Roasted Makhanas",
     details: "Tomato Flavour · ₹20",
+    orderProduct: ORDER_PRODUCTS[3]!,
+    isArtwork: true,
     images: [
       { src: tomatoRs20Artwork, alt: "FARMKY Premium Roasted Makhanas, Tomato Flavour, ₹20 pouch artwork" },
       { src: tomatoRs20ArtworkAlt, alt: "FARMKY Tomato Flavour ₹20 packaging artwork, alternate supplied view" },
@@ -78,6 +86,8 @@ const productVariants = [
   {
     title: "Premium Roasted Makhanas",
     details: "Achari Flavour · ₹20",
+    orderProduct: ORDER_PRODUCTS[4]!,
+    isArtwork: true,
     images: [
       { src: achariRs20Artwork, alt: "FARMKY Premium Roasted Makhanas, Achari Flavour, ₹20 pouch artwork" },
       { src: achariRs20ArtworkAlt, alt: "FARMKY Achari Flavour ₹20 packaging artwork, alternate supplied view" },
@@ -91,12 +101,15 @@ export function ProductVariantGallery({ home = false }: { home?: boolean }) {
     <div className="page-width">
       <div className="section-heading center-heading"><span className="eyebrow">FARMKY product range</span><h2 className="section-title">Find your FARMKY favourite.</h2><p className="section-copy">Explore every pack and flavour. Product names and pack details are shown as printed on the packaging.</p></div>
       <div className="product-variant-grid">
-        {productVariants.map((variant, index) => <article className={`product-variant-card ${home && index === 0 ? "featured-product-card" : ""}`} key={variant.details}>
-          <div className={`product-variant-images ${variant.images.length === 1 ? "single-variant-image" : ""}`}>
-            {variant.images.map((image) => <button className="product-variant-image" key={image.alt} type="button" onClick={() => setSelectedImage(image)} aria-label={`View ${variant.title}, ${variant.details}`}><img src={image.src} alt={image.alt} loading="lazy" /></button>)}
+        {productVariants.map((variant) => {
+          const images = home ? variant.images.slice(0, 1) : variant.images;
+          return <article className={`product-variant-card ${home && "isArtwork" in variant && variant.isArtwork ? "artwork-product-card" : ""}`} key={variant.details}>
+          <div className={`product-variant-images ${images.length === 1 ? "single-variant-image" : ""}`}>
+            {images.map((image) => <button className="product-variant-image" key={image.alt} type="button" onClick={() => setSelectedImage(image)} aria-label={`View ${variant.title}, ${variant.details}`}><img src={image.src} alt={image.alt} loading="lazy" /></button>)}
           </div>
-          <div className="product-variant-copy"><h3>{variant.title}</h3><p>{variant.details}</p>{home && index === 0 && <a className="catalog-order-link" href="#order">Order this pack <ArrowRight aria-hidden="true" /></a>}</div>
-        </article>)}
+          <div className="product-variant-copy"><h3>{variant.title}</h3><p>{variant.details}</p>{home && <OrderNowButton product={variant.orderProduct} />}</div>
+        </article>;
+        })}
       </div>
     </div>
     {selectedImage && <div className="lightbox" role="dialog" aria-modal="true" aria-label={selectedImage.alt} onClick={() => setSelectedImage(null)}><Button className="lightbox-close" variant="outline" size="icon" aria-label="Close image preview" onClick={() => setSelectedImage(null)}><X /></Button><img src={selectedImage.src} alt={selectedImage.alt} onClick={(event) => event.stopPropagation()} /><span className="image-caption">{selectedImage.alt}</span></div>}
