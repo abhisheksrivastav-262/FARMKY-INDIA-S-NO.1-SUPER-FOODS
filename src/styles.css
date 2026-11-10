@@ -185,10 +185,13 @@
 @layer components {
   .site-header { position: sticky; top: 0; z-index: 30; border-bottom: 1px solid var(--border); background: color-mix(in oklab, var(--background) 94%, transparent); backdrop-filter: blur(16px); }
   .header-inner { display: flex; min-height: 5.25rem; align-items: center; justify-content: space-between; gap: 1rem; }
-  .brand-lockup { display: inline-flex; align-items: center; gap: .7rem; color: var(--primary); text-decoration: none; }
+  .brand-lockup { display: inline-flex; align-items: center; gap: .5rem; color: var(--primary); text-decoration: none; }
+  .brand-emblem { display: grid; width: 3.15rem; height: 3.15rem; flex: none; place-items: center; overflow: hidden; }
+  .brand-emblem img { display: block; width: 100%; height: 100%; object-fit: contain; }
+  .brand-type { display: flex; flex-direction: column; align-items: flex-start; }
+  .brand-wordmark { display: block; width: 8.5rem; height: 1.8rem; object-fit: contain; }
   .brand-seal { display: grid; width: 2.5rem; height: 2.5rem; place-items: center; border: 1px solid var(--gold); border-radius: 50%; color: var(--primary); }
-  .brand-word { font-size: 1.5rem; font-weight: 700; letter-spacing: .13em; line-height: 1; }
-  .brand-subline { margin-top: .28rem; color: var(--muted-foreground); font-size: .57rem; font-weight: 600; letter-spacing: .16em; }
+  .brand-subline { margin-top: .06rem; color: var(--muted-foreground); font-size: .54rem; font-weight: 700; letter-spacing: .12em; }
   .desktop-nav { display: flex; align-items: center; gap: clamp(1rem, 2.1vw, 2rem); }
   .nav-link { color: var(--foreground); font-size: .82rem; text-decoration: none; transition: color .2s ease; }
   .nav-link:hover { color: var(--primary); }
@@ -387,14 +390,22 @@
   .form-whatsapp-fallback { grid-column: 1 / -1; width: fit-content; color: var(--primary); font-size: .82rem; font-weight: 700; text-underline-offset: .2em; }
   .site-footer { background: var(--deep-green); color: var(--cream); }
   .footer-top { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 3rem; padding-block: 3.5rem; }
-  .site-footer .brand-lockup { color: var(--cream); }
-  .site-footer .brand-seal { color: var(--gold); }
-  .site-footer .brand-subline { color: color-mix(in oklab, var(--cream) 65%, transparent); }
+  .footer-logo-frame { display: inline-flex; padding: .4rem .6rem; border-radius: .2rem; background: white; }
+  .site-footer .brand-emblem { width: 3.5rem; height: 3.5rem; }
+  .site-footer .brand-wordmark { width: 9.5rem; height: 2rem; }
+  .site-footer .brand-subline { color: #355a35; }
+  .footer-credentials { display: grid; gap: .4rem; margin-top: 1.15rem; color: var(--gold); font-size: .75rem; font-weight: 600; line-height: 1.55; }
   .footer-description { max-width: 20rem; margin-top: 1rem; color: color-mix(in oklab, var(--cream) 73%, transparent); font-size: .82rem; line-height: 1.7; }
   .footer-heading { color: var(--gold); font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
   .footer-links { display: grid; gap: .65rem; margin-top: 1rem; }
   .footer-links a, .footer-links span { width: fit-content; color: color-mix(in oklab, var(--cream) 84%, transparent); font-size: .8rem; text-decoration: none; }
   .footer-links a:hover { color: var(--gold); }
+  .business-credentials-section { background: var(--soft-cream); }
+  .business-credentials-section .section-title { margin-top: .6rem; }
+  .about-credentials { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem; }
+  .about-credentials article { display: grid; gap: .35rem; min-width: min(100%, 17rem); padding: 1.15rem 1.3rem; border: 1px solid var(--border); background: var(--background); }
+  .about-credentials span { color: var(--muted-foreground); font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+  .about-credentials strong { color: var(--primary); font-size: 1rem; }
   .footer-bottom { display: flex; justify-content: space-between; gap: 1rem; padding-block: 1.2rem; border-top: 1px solid color-mix(in oklab, var(--cream) 22%, transparent); color: color-mix(in oklab, var(--cream) 66%, transparent); font-size: .72rem; }
   @keyframes settle-in { from { opacity: 0; transform: translateY(1rem); } to { opacity: 1; transform: translateY(0); } }
   @media (max-width: 900px) {
@@ -415,6 +426,9 @@
   @media (max-width: 700px) {
     .page-width { width: min(100% - 2rem, 76rem); }
     .header-inner { min-height: 4.5rem; }
+    .brand-emblem { width: 2.55rem; height: 2.55rem; }
+    .brand-wordmark { width: 6.7rem; height: 1.45rem; }
+    .brand-subline { font-size: .45rem; letter-spacing: .08em; }
     .desktop-nav { display: none; }
     .menu-toggle { display: inline-flex; }
     .mobile-menu { position: absolute; top: 100%; right: 0; left: 0; display: grid; gap: 0; padding: .5rem 1rem 1rem; border-bottom: 1px solid var(--border); background: var(--background); }

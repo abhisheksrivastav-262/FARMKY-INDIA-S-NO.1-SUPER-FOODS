@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Leaf, Menu, Phone, X } from "lucide-react";
+import { Menu, Phone, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FARMKY_PHONE_LINK, FARMKY_PHONE_NUMBER } from "@/lib/contact";
+import farmkyEmblem from "@/assets/farmky-logo-emblem.png";
+import farmkyWordmark from "@/assets/farmky-logo-wordmark.png";
 
 export const pageLinks = [
   { label: "Home", to: "/" },
@@ -17,8 +19,8 @@ export const pageLinks = [
 
 function BrandMark() {
   return <Link className="brand-lockup" to="/" aria-label="FARMKY home">
-    <span className="brand-seal" aria-hidden="true"><Leaf size={18} strokeWidth={1.6} /></span>
-    <span><span className="brand-word block">FARMKY</span><span className="brand-subline block">INDIA'S NO.1 SUPER FOODS</span></span>
+    <span className="brand-emblem"><img src={farmkyEmblem} alt="" /></span>
+    <span className="brand-type"><img className="brand-wordmark" src={farmkyWordmark} alt="" /><span className="brand-subline">INDIA'S NO.1 SUPER FOODS</span></span>
   </Link>;
 }
 
@@ -50,9 +52,9 @@ export function FloatingWhatsApp() {
 export function SiteFooter() {
   return <footer className="site-footer">
     <div className="page-width footer-top">
-      <div className="footer-brand"><BrandMark /><p className="footer-description">FARMKY Premium Makhana — a nature-inspired snack for everyday moments.</p></div>
+      <div className="footer-brand"><div className="footer-logo-frame"><BrandMark /></div><p className="footer-description">FARMKY Premium Makhana — a nature-inspired snack for everyday moments.</p></div>
       <div><h2 className="footer-heading">Explore FARMKY</h2><div className="footer-links">{pageLinks.slice(0, 5).map((item) => <Link key={item.to} to={item.to}>{item.label}</Link>)}</div></div>
-      <div><h2 className="footer-heading">Get in touch</h2><div className="footer-links"><Link to="/gallery">Gallery</Link><Link to="/brand-promise">Our brand promise</Link><Link to="/contact">Business enquiries</Link><span>Privacy Policy</span><span>Terms &amp; Conditions</span></div></div>
+      <div><h2 className="footer-heading">Get in touch</h2><div className="footer-links"><Link to="/gallery">Gallery</Link><Link to="/brand-promise">Our brand promise</Link><Link to="/contact">Business enquiries</Link><span>Privacy Policy</span><span>Terms &amp; Conditions</span></div><div className="footer-credentials"><span>GSTIN: 10ALWPY6747R1ZS</span><span>FSSAI Licence: 10424310000092</span></div></div>
     </div>
     <div className="page-width footer-bottom"><span>© 2026 FARMKY. All Rights Reserved.</span><span>India's No.1 Super Foods</span></div>
   </footer>;
