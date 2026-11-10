@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CardGrid, ContentPage, PromiseHighlights, StorySection, metaFor } from "@/components/brand-pages";
-import makhanaPackImage from "@/assets/farmky-makhana-pack.png";
+import makhanaPackImage from "@/assets/products/premium-makhana-250g-front.webp";
 export const Route = createFileRoute("/brand-promise")({ head: () => metaFor("Our Brand Promise", "Read FARMKY's nature-inspired promise for a thoughtful everyday makhana experience."), component: PromisePage });
 function PromisePage() {
  return <ContentPage eyebrow="The FARMKY promise" title="A gift of nature, a promise of purity." intro="A nature-inspired approach to everyday snacking, grounded in clear product information and a product presentation designed to feel special." image={makhanaPackImage} imageAlt="FARMKY Premium Makhana product package" cta="Connect with FARMKY">

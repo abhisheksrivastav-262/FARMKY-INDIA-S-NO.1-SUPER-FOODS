@@ -13,8 +13,9 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import makhanaImage from "@/assets/farmky-makhana.jpg";
-import makhanaPackImage from "@/assets/farmky-makhana-pack.png";
+import premiumMakhanaFront from "@/assets/products/premium-makhana-250g-front.webp";
 import { createWhatsAppEnquiryUrl } from "@/lib/contact";
+import { HomeOrderCard } from "@/components/order-form";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -65,7 +66,7 @@ const benefits = [
 ];
 
 const galleryItems = [
-  { title: "FARMKY Premium Makhana", src: makhanaPackImage, className: "gallery-pack" },
+  { title: "FARMKY Premium Makhana · Foxnut | Gorgon Nut · 250g", src: premiumMakhanaFront, className: "gallery-pack" },
   { title: "A bowl of makhana", src: makhanaImage, className: "" },
 ];
 
@@ -221,6 +222,8 @@ function FarmkyHome() {
           </div>
         </div>
       </section>
+
+      <HomeOrderCard />
 
       <section className="benefits-section section-space" id="benefits">
         <div className="page-width">

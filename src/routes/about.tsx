@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CardGrid, ContentPage, StorySection, metaFor } from "@/components/brand-pages";
-import makhanaPackImage from "@/assets/farmky-makhana-pack.png";
+import makhanaPackImage from "@/assets/products/premium-makhana-250g-front.webp";
 
 export const Route = createFileRoute("/about")({ head: () => metaFor("About Us", "Get to know FARMKY, a nature-inspired food brand bringing Premium Makhana to everyday moments."), component: AboutPage });
 function AboutPage() {

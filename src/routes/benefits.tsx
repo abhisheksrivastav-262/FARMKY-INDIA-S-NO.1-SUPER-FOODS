@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CardGrid, ContentPage, StorySection, metaFor } from "@/components/brand-pages";
-import makhanaPackImage from "@/assets/farmky-makhana-pack.png";
+import makhanaPackImage from "@/assets/products/premium-makhana-250g-front.webp";
 export const Route = createFileRoute("/benefits")({ head: () => metaFor("Makhana Benefits", "Learn about makhana, a versatile foxnut snack, and simple ways to enjoy it."), component: BenefitsPage });
 function BenefitsPage() {
  return <ContentPage eyebrow="A little about makhana" title="Discover the goodness of makhana." intro="Makhana, also called foxnut or gorgon nut, is enjoyed in many ways. Its light texture and versatility make it easy to bring into everyday snack moments." image={makhanaPackImage} imageAlt="FARMKY Premium Makhana 250g package" imageFit="contain" cta="Explore FARMKY Makhana" ctaHref="/product">

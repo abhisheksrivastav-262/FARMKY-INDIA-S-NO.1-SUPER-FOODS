@@ -290,6 +290,22 @@
   .product-fact-label { color: var(--muted-foreground); font-size: .69rem; letter-spacing: .1em; text-transform: uppercase; }
   .product-fact-value { margin-top: .35rem; color: var(--primary); font-family: var(--font-display-family); font-size: 1.32rem; font-weight: 600; }
   .product-copy .hero-button { margin-top: 1.8rem; }
+  .home-order-section { background: var(--background); }
+  .home-order-card { display: grid; grid-template-columns: .8fr 1.2fr; align-items: center; gap: clamp(2rem, 7vw, 6rem); padding: clamp(1.5rem, 4vw, 3.5rem); background: var(--soft-cream); }
+  .home-order-image { display: grid; min-height: 27rem; place-items: center; background: var(--background); }
+  .home-order-image img { display: block; width: 100%; height: 27rem; padding: 1rem; object-fit: contain; }
+  .home-order-copy .section-title { max-width: 14ch; margin-top: .8rem; }
+  .home-order-copy .section-copy { margin-top: .8rem; }
+  .home-order-copy .order-description { max-width: 35rem; margin-bottom: 1.4rem; }
+  .order-modal-backdrop { position: fixed; z-index: 80; inset: 0; display: grid; place-items: center; overflow: auto; padding: 1.25rem; background: color-mix(in oklab, var(--deep-green) 78%, transparent); }
+  .order-modal { position: relative; width: min(100%, 44rem); max-height: min(92vh, 58rem); overflow: auto; padding: clamp(1.5rem, 4vw, 2.5rem); background: var(--background); box-shadow: 0 1rem 4rem oklch(0.1 0.03 150 / 30%); }
+  .order-modal-close { position: absolute; top: 1rem; right: 1rem; }
+  .order-modal .section-title { max-width: 14ch; margin-top: .65rem; font-size: clamp(2rem, 5vw, 3rem); }
+  .order-modal-intro { margin-top: .6rem; color: var(--muted-foreground); font-size: .88rem; line-height: 1.65; }
+  .order-form { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.4rem; }
+  .order-form .form-submit { margin-top: .25rem; }
+  .order-form .form-status { margin-top: .25rem; }
+  .order-form .form-status a { color: var(--primary); font-weight: 700; }
   .benefits-section { background: var(--background); }
   .benefit-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--border); border-left: 1px solid var(--border); }
   .benefit-item { min-height: 12rem; padding: 1.5rem; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); transition: background .2s ease; }
@@ -337,6 +353,12 @@
   .contact-number { display: inline-flex; margin-top: 1.2rem; color: var(--primary); font-size: .95rem; font-weight: 700; text-decoration: underline; text-underline-offset: .2em; }
   .contact-types { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.5rem; }
   .contact-types span { padding: .45rem .7rem; border: 1px solid var(--border); color: var(--primary); font-size: .7rem; }
+  .payment-section { background: var(--background); }
+  .payment-card { display: grid; grid-template-columns: 1fr minmax(14rem, 22rem); align-items: center; gap: clamp(2rem, 7vw, 6rem); padding: clamp(1.5rem, 4vw, 3rem); border: 1px solid var(--border); background: var(--soft-cream); }
+  .payment-card .section-title { margin-top: .6rem; }
+  .payment-card .section-copy { margin-top: .8rem; }
+  .payment-note { margin-top: 1rem; color: var(--muted-foreground); font-size: .8rem; line-height: 1.6; }
+  .payment-qr { display: block; width: 100%; max-width: 22rem; justify-self: center; background: white; }
   .enquiry-form { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
   .form-field { display: flex; flex-direction: column; gap: .4rem; }
   .form-field-wide { grid-column: 1 / -1; }
@@ -396,7 +418,10 @@
     .hero-image-wrap { min-height: 26rem; }
     .hero-proof { gap: .8rem 1.1rem; margin-top: 1.7rem; }
     .marquee-inner { justify-content: flex-start; overflow: auto; padding-inline: 1rem; }
-    .about-intro, .product-layout, .goodness-layout, .contact-layout { grid-template-columns: 1fr; gap: 2rem; }
+    .about-intro, .product-layout, .goodness-layout, .contact-layout, .home-order-card, .payment-card { grid-template-columns: 1fr; gap: 2rem; }
+    .home-order-image { min-height: 22rem; }
+    .home-order-image img { height: 22rem; }
+    .payment-qr { max-width: 20rem; }
     .about-intro .section-title { max-width: 11ch; }
     .feature-grid { gap: 1.2rem; }
     .feature-item { padding-right: .2rem; }
@@ -420,6 +445,8 @@
     .product-variant-images { grid-template-columns: 1fr; }
     .product-variant-images, .product-variant-image { min-height: 17rem; }
     .enquiry-form { grid-template-columns: 1fr; }
+    .order-form { grid-template-columns: 1fr; }
+    .order-form .form-field-wide, .order-form .form-submit, .order-form .form-status { grid-column: 1; }
     .form-field-wide, .form-submit, .form-status { grid-column: 1; }
     .footer-top { grid-template-columns: 1fr; }
     .footer-brand { grid-column: auto; }
