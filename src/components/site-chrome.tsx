@@ -54,7 +54,7 @@ export function SiteFooter() {
     <div className="page-width footer-top">
       <div className="footer-brand"><div className="footer-logo-frame"><BrandMark /></div><p className="footer-description">FARMKY Premium Makhana — a nature-inspired snack for everyday moments.</p></div>
       <div><h2 className="footer-heading">Explore FARMKY</h2><div className="footer-links">{pageLinks.slice(0, 5).map((item) => <Link key={item.to} to={item.to}>{item.label}</Link>)}</div></div>
-      <div><h2 className="footer-heading">Get in touch</h2><div className="footer-links"><Link to="/gallery">Gallery</Link><Link to="/brand-promise">Our brand promise</Link><Link to="/contact">Business enquiries</Link><span>Privacy Policy</span><span>Terms &amp; Conditions</span></div><div className="footer-credentials"><span>GSTIN: 10ALWPY6747R1ZS</span><span>FSSAI Licence: 10424310000092</span></div></div>
+      <div><h2 className="footer-heading">Get in touch</h2><div className="footer-links"><Link to="/gallery">Gallery</Link><Link to="/brand-promise">Our brand promise</Link><Link to="/contact">Business enquiries</Link><span>Privacy Policy</span><span>Terms &amp; Conditions</span></div><div className="footer-contact-details"><a href="tel:+918360131158">+91 83601 31158</a><a href="tel:+918757919914">+91 87579 19914</a><a href="mailto:Farmky21@gmail.com">Farmky21@gmail.com</a><span>Santi Place, near Central Bank, Harda Bazar, Purnea, Bihar - 854303</span></div><div className="footer-credentials"><span>GSTIN: 10ALWPY6747R1ZS</span><span>FSSAI Licence: 10424310000092</span></div></div>
     </div>
     <div className="page-width footer-bottom"><span>© 2026 FARMKY. All Rights Reserved.</span><span>India's No.1 Super Foods</span></div>
   </footer>;

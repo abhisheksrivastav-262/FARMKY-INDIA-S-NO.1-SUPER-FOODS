@@ -42,7 +42,7 @@ export function CardGrid({ items }: { items: { title: string; text: string }[] }
 export function ProductPage() {
   return <ContentPage eyebrow="Our signature product · 250g" title="A little goodness, beautifully packed." intro="Meet FARMKY Premium Makhana: foxnuts, also known as gorgon nuts, presented for the everyday snack moments you make your own." image={premiumMakhanaFront} imageAlt="FARMKY Premium Makhana 250g package" imageFit="contain" cta="Ask about our product">
     <section className="section-space product-detail-section"><div className="page-width product-detail-grid"><div className="product-detail-photo"><img src={makhanaImage} alt="A bowl of makhana ready to enjoy" loading="lazy" /></div><div><span className="eyebrow">FARMKY Premium Makhana</span><h2 className="section-title">Simple, versatile, ready for your day.</h2><p className="section-copy">A premium food product with a light, delightful character. Enjoy it on its own, add it to a snack bowl, or pair it with your favourite flavours.</p><div className="product-facts"><div className="product-fact"><div className="product-fact-label">Product</div><div className="product-fact-value">Premium Makhana</div></div><div className="product-fact"><div className="product-fact-label">Also known as</div><div className="product-fact-value">Foxnut / Gorgon Nut</div></div><div className="product-fact"><div className="product-fact-label">Net weight</div><div className="product-fact-value">250g</div></div><div className="product-fact"><div className="product-fact-label">Enjoy</div><div className="product-fact-value">Anytime snacking</div></div></div><Button asChild className="hero-button"><a href="/contact">Product enquiry<ArrowRight /></a></Button></div></div></section>
-    <ProductVariantGallery />
+    <ProductVariantGallery orderable />
     <CardGrid items={[{ title: "A simple snack", text: "Enjoy a handful as it is for a light, easygoing pause." }, { title: "Make a bowl", text: "Pair makhana with your preferred nuts, seeds, or dried fruit." }, { title: "Find your flavour", text: "Season it at home to suit the moment and your own taste." }]} />
   </ContentPage>;
 }
@@ -97,19 +97,20 @@ const productVariants = [
   },
 ];
 
-export function ProductVariantGallery({ home = false }: { home?: boolean }) {
+export function ProductVariantGallery({ home = false, orderable = false }: { home?: boolean; orderable?: boolean }) {
   const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string } | null>(null);
-  return <section className={`section-space gallery-section product-variants-section ${home ? "home-product-catalog" : ""}`} id={home ? "product-range" : "product-gallery"}>
+  const compactCatalog = home || orderable;
+  return <section className={`section-space gallery-section product-variants-section ${home ? "home-product-catalog" : orderable ? "product-page-catalog" : ""}`} id={home ? "product-range" : "product-gallery"}>
     <div className="page-width">
       <div className="section-heading center-heading"><span className="eyebrow">FARMKY product range</span><h2 className="section-title">Find your FARMKY favourite.</h2><p className="section-copy">Explore every pack and flavour. Product names and pack details are shown as printed on the packaging.</p></div>
       <div className="product-variant-grid">
         {productVariants.map((variant) => {
-          const images = home ? variant.images.slice(0, 1) : variant.images;
-          return <article className={`product-variant-card ${home && "isArtwork" in variant && variant.isArtwork ? "artwork-product-card" : ""}`} key={variant.details}>
+          const images = compactCatalog ? variant.images.slice(0, 1) : variant.images;
+          return <article className={`product-variant-card ${compactCatalog && "isArtwork" in variant && variant.isArtwork ? "artwork-product-card" : ""}`} key={variant.details}>
           <div className={`product-variant-images ${images.length === 1 ? "single-variant-image" : ""}`}>
             {images.map((image) => <button className="product-variant-image" key={image.alt} type="button" onClick={() => setSelectedImage(image)} aria-label={`View ${variant.title}, ${variant.details}`}><img src={image.src} alt={image.alt} loading="lazy" /></button>)}
           </div>
-          <div className="product-variant-copy"><h3>{variant.title}</h3><p>{variant.details}</p>{home && <OrderNowButton product={variant.orderProduct} />}</div>
+          <div className="product-variant-copy"><h3>{variant.title}</h3><p>{variant.details}</p>{compactCatalog && <OrderNowButton product={variant.orderProduct} />}</div>
         </article>;
         })}
       </div>

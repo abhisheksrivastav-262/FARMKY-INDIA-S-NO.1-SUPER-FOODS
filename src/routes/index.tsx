@@ -14,8 +14,11 @@ import {
 import { Button } from "@/components/ui/button";
 import makhanaImage from "@/assets/farmky-makhana.jpg";
 import premiumMakhanaFront from "@/assets/products/premium-makhana-250g-front.webp";
+import tomatoRs10Artwork from "@/assets/products/tomato-rs10-artwork.webp";
+import achariRs10Artwork from "@/assets/products/achari-rs10-artwork.webp";
+import tomatoRs20Artwork from "@/assets/products/tomato-rs20-artwork.webp";
+import achariRs20Artwork from "@/assets/products/achari-rs20-artwork.webp";
 import { createWhatsAppEnquiryUrl } from "@/lib/contact";
-import { ProductOrderDialog } from "@/components/order-form";
 import { ProductVariantGallery } from "@/components/brand-pages";
 
 export const Route = createFileRoute("/")({
@@ -71,8 +74,17 @@ const galleryItems = [
   { title: "A bowl of makhana", src: makhanaImage, className: "" },
 ];
 
+const heroSlides = [
+  { title: "FARMKY Premium Makhana", details: "Foxnut | Gorgon Nut · 250g", image: makhanaImage, alt: "A bowl of golden FARMKY makhana on natural green linen", artwork: false },
+  { title: "Premium Roasted Makhanas", details: "Tomato Flavour · ₹10 pack", image: tomatoRs10Artwork, alt: "FARMKY Premium Roasted Makhanas Tomato Flavour ₹10 pack artwork", artwork: true },
+  { title: "Premium Roasted Makhanas", details: "Achari Flavour · ₹10 pack", image: achariRs10Artwork, alt: "FARMKY Premium Roasted Makhanas Achari Flavour ₹10 pack artwork", artwork: true },
+  { title: "Premium Roasted Makhanas", details: "Tomato Flavour · ₹20 pack", image: tomatoRs20Artwork, alt: "FARMKY Premium Roasted Makhanas Tomato Flavour ₹20 pack artwork", artwork: true },
+  { title: "Premium Roasted Makhanas", details: "Achari Flavour · ₹20 pack", image: achariRs20Artwork, alt: "FARMKY Premium Roasted Makhanas Achari Flavour ₹20 pack artwork", artwork: true },
+];
+
 function FarmkyHome() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [activeHeroSlide, setActiveHeroSlide] = useState(0);
   const [formMessage, setFormMessage] = useState("");
   const [whatsAppLink, setWhatsAppLink] = useState("");
 
@@ -93,6 +105,12 @@ function FarmkyHome() {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [lightboxIndex]);
 
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const timer = window.setInterval(() => setActiveHeroSlide((index) => (index + 1) % heroSlides.length), 4800);
+    return () => window.clearInterval(timer);
+  }, []);
+
   const submitEnquiry = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const url = createWhatsAppEnquiryUrl(new FormData(event.currentTarget));
@@ -100,6 +118,8 @@ function FarmkyHome() {
     setFormMessage("WhatsApp opened with your enquiry details. Review the message and tap Send to deliver it to FARMKY.");
     window.open(url, "_blank", "noopener,noreferrer");
   };
+
+  const currentHeroSlide = heroSlides[activeHeroSlide]!;
 
   return (
     <main className="home-page">
@@ -128,18 +148,21 @@ function FarmkyHome() {
               <span><Check aria-hidden="true" size={15} /> Premium makhana</span>
             </div>
           </div>
-          <div className="hero-image-wrap">
+          <div className="hero-image-wrap hero-carousel" role="region" aria-roledescription="carousel" aria-label="FARMKY makhana products">
             <img
-              className="hero-image"
-              src={makhanaImage}
-              alt="A bowl of golden makhana on natural green linen"
-              width={1024}
-              height={1280}
-              fetchPriority="high"
+              key={currentHeroSlide.image}
+              className={`hero-image ${currentHeroSlide.artwork ? "hero-slide-artwork" : ""}`}
+              src={currentHeroSlide.image}
+              alt={currentHeroSlide.alt}
+              fetchPriority={activeHeroSlide === 0 ? "high" : "auto"}
             />
-            <div className="image-caption">
-              <CircleDot aria-hidden="true" size={15} />
-              FARMKY Premium Makhana · 250g
+            <div className="hero-slide-shade" aria-hidden="true" />
+            <div className="hero-slide-copy" key={currentHeroSlide.title + currentHeroSlide.details}>
+              <span>{currentHeroSlide.title}</span>
+              <p>{currentHeroSlide.details}</p>
+            </div>
+            <div className="hero-carousel-dots" aria-label="Choose a product slide">
+              {heroSlides.map((slide, index) => <button key={slide.details} type="button" className={index === activeHeroSlide ? "active" : ""} aria-label={`Show ${slide.title}, ${slide.details}`} aria-pressed={index === activeHeroSlide} onClick={() => setActiveHeroSlide(index)} />)}
             </div>
           </div>
         </div>
@@ -225,7 +248,6 @@ function FarmkyHome() {
       </section>
 
       <ProductVariantGallery home />
-      <ProductOrderDialog />
 
       <section className="benefits-section section-space" id="benefits">
         <div className="page-width">

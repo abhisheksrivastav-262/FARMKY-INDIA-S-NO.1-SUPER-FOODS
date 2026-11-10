@@ -13,6 +13,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { FloatingWhatsApp, SiteFooter, SiteHeader } from "@/components/site-chrome";
+import { ProductOrderDialog } from "@/components/order-form";
 
 function NotFoundComponent() {
   return (
@@ -140,6 +141,7 @@ function RootComponent() {
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <SiteHeader />
       <Outlet />
+      <ProductOrderDialog />
       <SiteFooter />
       <FloatingWhatsApp />
     </QueryClientProvider>
