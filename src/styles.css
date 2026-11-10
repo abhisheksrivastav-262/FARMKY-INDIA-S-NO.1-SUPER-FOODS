@@ -321,6 +321,7 @@
   .contact-layout { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(2.5rem, 8vw, 8rem); }
   .contact-copy .section-title { max-width: 10ch; }
   .contact-copy .section-copy { margin-top: 1.1rem; }
+  .contact-number { display: inline-flex; margin-top: 1.2rem; color: var(--primary); font-size: .95rem; font-weight: 700; text-decoration: underline; text-underline-offset: .2em; }
   .contact-types { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.5rem; }
   .contact-types span { padding: .45rem .7rem; border: 1px solid var(--border); color: var(--primary); font-size: .7rem; }
   .enquiry-form { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
@@ -334,6 +335,7 @@
   .form-submit { grid-column: 1 / -1; justify-self: start; min-height: 3rem; padding-inline: 1.5rem; }
   .form-status { grid-column: 1 / -1; min-height: 1.2rem; color: var(--muted-foreground); font-size: .8rem; line-height: 1.6; }
   .form-status[data-state="ready"] { color: var(--primary); }
+  .form-whatsapp-fallback { grid-column: 1 / -1; width: fit-content; color: var(--primary); font-size: .82rem; font-weight: 700; text-underline-offset: .2em; }
   .site-footer { background: var(--deep-green); color: var(--cream); }
   .footer-top { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 3rem; padding-block: 3.5rem; }
   .site-footer .brand-lockup { color: var(--cream); }

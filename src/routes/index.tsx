@@ -14,6 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import makhanaImage from "@/assets/farmky-makhana.jpg";
 import makhanaPackImage from "@/assets/farmky-makhana-pack.png";
+import { createWhatsAppEnquiryUrl } from "@/lib/contact";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -71,6 +72,7 @@ const galleryItems = [
 function FarmkyHome() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [formMessage, setFormMessage] = useState("");
+  const [whatsAppLink, setWhatsAppLink] = useState("");
 
   useEffect(() => {
     if (lightboxIndex === null) return;
@@ -91,9 +93,10 @@ function FarmkyHome() {
 
   const submitEnquiry = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setFormMessage(
-      "Your enquiry is ready, but hasn’t been sent. FARMKY’s verified contact details are needed to receive it.",
-    );
+    const url = createWhatsAppEnquiryUrl(new FormData(event.currentTarget));
+    setWhatsAppLink(url);
+    setFormMessage("WhatsApp opened with your enquiry details. Review the message and tap Send to deliver it to FARMKY.");
+    window.open(url, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -351,15 +354,20 @@ function FarmkyHome() {
               </select>
             </label>
             <label className="form-field form-field-wide">
+              <span className="form-label">Subject</span>
+              <input className="form-control" name="subject" placeholder="What is your enquiry about?" required />
+            </label>
+            <label className="form-field form-field-wide">
               <span className="form-label">Message</span>
               <textarea className="form-control" name="message" placeholder="How can we help?" required />
             </label>
             <Button className="form-submit" type="submit">
-              Prepare enquiry <ArrowRight aria-hidden="true" />
+              Continue on WhatsApp <ArrowRight aria-hidden="true" />
             </Button>
             <p aria-live="polite" className="form-status" data-state={formMessage ? "ready" : "idle"}>
               {formMessage}
             </p>
+            {whatsAppLink && <a className="form-whatsapp-fallback" href={whatsAppLink} target="_blank" rel="noreferrer">Open the prepared WhatsApp message</a>}
           </form>
         </div>
       </section>
